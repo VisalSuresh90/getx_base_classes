@@ -1,0 +1,24 @@
+name: getx_base_classes
+description: A set of base classes for GetX projects in Flutter.
+version: 0.0.1
+homepage: https://github.com/VisalSuresh90/getx_base_classes.git
+
+
+environment:
+  sdk: '>=3.1.0 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  get: 
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+
+flutter:
+
+
