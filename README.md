@@ -161,7 +161,6 @@ Feel free to contribute to this project. If you find any issues or have suggesti
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-```
 
 This example includes code snippets and explanations for each of your base classes, making it easier for users to understand how to use them in their projects.
 
