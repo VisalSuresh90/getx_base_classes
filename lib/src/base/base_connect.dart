@@ -7,19 +7,35 @@ import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/request/request.dart';
 import 'package:getx_base_classes/getx_base_classes.dart';
 
+/// A base class for managing HTTP requests and connections using GetX.
 class BaseConnect extends GetConnect {
+  /// Headers to be included in each HTTP request.
   final Map<String, String> header;
+
+  /// Base URL for the application.
   final String appBaseUrl;
+
+  /// Optional URL for authentication purposes.
   final String? authenticatorUrl;
+
+  /// A constant representing the class tag for debugging and logging purposes.
   static const TAG = 'BaseConnect';
 
-  BaseConnect(
-      {Map<String, String>? header, String? baseUrl, this.authenticatorUrl})
-      : header = header ?? {'Content-Type': 'application/json'},
+  /// Constructor for [BaseConnect].
+  ///
+  /// [header]: Headers to be included in each HTTP request.
+  /// [baseUrl]: Base URL for the application.
+  /// [authenticatorUrl]: Optional URL for authentication purposes.
+  BaseConnect({
+    Map<String, String>? header,
+    String? baseUrl,
+    this.authenticatorUrl,
+  })  : header = header ?? {'Content-Type': 'application/json'},
         appBaseUrl = baseUrl ?? BaseAppEnv.serverOne {
     onInit();
   }
 
+  /// Initializes the [BaseConnect] instance by setting the base URL, headers, and authenticator.
   @override
   void onInit() {
     // Set the base URL for all requests
@@ -37,7 +53,6 @@ class BaseConnect extends GetConnect {
     // Add authenticator if provided
     if (authenticatorUrl != null) {
       httpClient.addAuthenticator((Request<dynamic> request) async {
-        // final response = await get("http://yourapi/token");
         final response = await get(authenticatorUrl!);
         final token = response.body['token'];
         // Set the header
@@ -45,12 +60,24 @@ class BaseConnect extends GetConnect {
         return request;
       });
     }
-    //Autenticator will be called 3 times if HttpStatus is
-    //HttpStatus.unauthorized
+
+    // Authenticator will be called 3 times if HttpStatus is
+    // HttpStatus.unauthorized
     httpClient.maxAuthRetries = 3;
+
     super.onInit();
   }
 
+  /// Performs an HTTP request and returns a [BaseResponse] containing the result.
+  ///
+  /// [path]: The path of the endpoint.
+  /// [fromJsonT]: A function to convert the JSON response to a typed object.
+  /// [data]: Optional data to be sent with the request.
+  /// [query]: Optional query parameters.
+  /// [isPost]: Indicates if it's a POST request.
+  /// [isPut]: Indicates if it's a PUT request.
+  /// [isDelete]: Indicates if it's a DELETE request.
+  /// [handleErrorStatus]: A function to handle error statuses.
   Future<BaseResponse<T>> requestWithResponse<T>(
     String path, {
     required T Function(Map<String, dynamic>) fromJsonT,
@@ -113,18 +140,22 @@ class BaseConnect extends GetConnect {
     }
   }
 
+  /// Asynchronously performs a GET request to the specified [endpoint].
   Future<Response> getAsync(String endpoint) async {
     return await get(endpoint);
   }
 
+  /// Asynchronously performs a POST request to the specified [endpoint] with the provided [data].
   Future<Response> postAsync(String endpoint, dynamic data) async {
     return await post(endpoint, data);
   }
 
+  /// Asynchronously performs a PUT request to the specified [endpoint] with the provided [data].
   Future<Response> putAsync(String endpoint, dynamic data) async {
     return await put(endpoint, data);
   }
 
+  /// Asynchronously performs a DELETE request to the specified [endpoint].
   Future<Response> deleteAsync(String endpoint) async {
     return await delete(endpoint);
   }

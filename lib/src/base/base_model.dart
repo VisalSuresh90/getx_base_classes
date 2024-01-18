@@ -1,23 +1,15 @@
+/// An abstract class defining the contract for model classes in the application.
+///
+/// Extend this class to create custom models for different data entities.
 abstract class BaseModel<T> {
-  // Define a method for deserialization
+  /// Deserializes the provided [json] map into an instance of the model.
+  ///
+  /// This method should be implemented by concrete model classes to convert JSON data
+  /// into a strongly-typed model object.
   T fromJson(Map<String, dynamic> json);
 
-  // Define a method for serialization
-  Map<String, dynamic> toJson();
+  /// Serializes the model instance into a [Map] of key-value pairs.
+  ///
+  /// This method should be implemented by concrete model classes to convert the model
+  ///
 }
-
-
-
-//  final api = BaseConnect(header: header, baseUrl: baseUrl);
-
-//   try {
-//     final response = await api.requestWithResponse(
-//       '/example',
-//       fromJsonT: (json) => YourDataModel.fromJson(json),
-//     );
-
-//     print('Response: ${response.success}, ${response.message}, ${response.data}');
-//   } catch (error) {
-//     print('Error: $error');
-//   }
-//https://portfolio-visal.s3.eu-west-2.amazonaws.com/cart.json

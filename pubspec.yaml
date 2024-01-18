@@ -1,6 +1,6 @@
 name: getx_base_classes
-description: A set of base classes for GetX projects in Flutter.
-version: 0.0.1
+description: A collection of base classes for GetX architecture in Flutter, providing common functionality for controllers, views, middleware, and more.
+version: 0.0.2
 homepage: https://github.com/VisalSuresh90/getx_base_classes.git
 
 

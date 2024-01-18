@@ -3,11 +3,19 @@ import 'package:get/get.dart';
 
 import 'base_controller.dart';
 
+/// An abstract class representing a base view in a GetX architecture with common functionality.
+///
+/// Extend this class to create custom views for different screens or UI components.
 abstract class BaseView<T extends BaseController> extends GetView<T> {
+  /// The widget to be shown as a progress indicator. Defaults to [CircularProgressIndicator].
   final Widget? progressDialogWidget;
 
+  /// Constructs a [BaseView] with an optional [progressDialogWidget].
+  ///
+  /// [progressDialogWidget]: The widget to be shown as a progress indicator.
   const BaseView({Key? key, this.progressDialogWidget}) : super(key: key);
 
+  /// Builds the view with the common structure, including error handling and loading indicators.
   @override
   Widget build(BuildContext context) {
     return Obx(() {
@@ -34,8 +42,10 @@ abstract class BaseView<T extends BaseController> extends GetView<T> {
     });
   }
 
+  /// Builds the main view content.
   Widget buildView();
 
+  /// Shows an error popup dialog with the provided error message.
   void _showErrorPopup(BuildContext context) {
     Get.defaultDialog(
       barrierDismissible: false,
